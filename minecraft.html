@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8"> 
+</head> 
+<title>FTPbox</title>
+<style type="text/css">
+    body {background-image:url('https://pic1.imgdb.cn/item/68f482c33203f7be007d478b.jpg');background-size: 50%;}
+    /* Classic macOS 8-ish window styling */
+    .mac-window {
+        width: 680px;
+        margin: 48px auto;
+        background: linear-gradient(#d9d9d9, #bfbfbf);
+        border: 2px solid #fff;
+        box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+        font-family: "Helvetica Neue", Arial, "Nimbus Sans L", sans-serif;
+        color: #000;
+        user-select: none;
+        position: relative;
+    }
+
+    /* Title bar */
+    .titlebar {
+        height: 28px;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(#e9e9e9, #bfbfbf);
+        border-bottom: 1px solid #999;
+        padding: 0 8px;
+        cursor: move;
+    }
+    .titlebar .btns { display:flex; gap:6px; width:72px; }
+    .btn {
+        width:12px; height:12px;
+        border-radius:50%;
+        display:inline-block;
+        box-shadow: inset 0 -1px 0 rgba(0,0,0,0.2);
+        border:1px solid #777;
+    }
+    .right{ text-align: right; margin-top: 10px; }
+    .btn.close { background: radial-gradient(circle at 30% 30%, #ff6b6b, #c43f3f); }
+    .btn.minimize { background: radial-gradient(circle at 30% 30%, #ffd76a, #c2932b); }
+    .btn.zoom { background: radial-gradient(circle at 30% 30%, #86ec86, #2fa32f); }
+    .txt_title{ font-size: 20px; font-weight: bold; text-align: center; margin-top: 10px; }
+    .title { flex:1; text-align:center; font-weight:bold; font-size:13px; color:#111; text-shadow: 0 1px #fff; }
+    .meta { margin-top:8px; font-size:13px; }
+    .menu-hint { width:120px; font-size:11px; text-align:right; color:#333; opacity:.8; }
+    .img_border {
+        border: 2px solid #777;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        padding: 4px;
+        background: #f0f0f0;
+        display: inline-block;
+        margin: 10px;
+        display: inline-block;
+    }
+    @media (max-width:720px){ .mac-window { width:95%; } }
+</style>
+</head>
+<body>
+    <!-- macOS Finder top bar -->
+    <style>
+        .os-topbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+            background: linear-gradient(#e9e9e9, #bfbfbf);
+            border:1px solid #777;
+            font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 13px;
+            color: #0b0b0b;
+            z-index: 9999;
+            user-select: none;
+        }
+        .os-left, .os-right { display:flex; align-items:center; gap:10px; height:100%; }
+        .apple { font-size:18px; line-height:28px; margin-right:6px; cursor:default; }
+        .finder-menu { display:flex; gap:10px; align-items:center; }
+        .finder-menu .item {
+            padding: 4px 6px;
+            border-radius:4px;
+            cursor:default;
+            color:#111;
+        }
+        .finder-menu .item:hover { background: rgba(0,0,0,0.06); }
+        .os-right { gap:8px; }
+        .sys-icon {
+            width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center;
+            border-radius:4px; opacity:0.9; transition:background .12s;
+            cursor:default; font-size:13px;
+        }
+        .sys-icon:hover { background: rgba(0,0,0,0.06); }
+        .top-clock { font-size:13px; padding:0 6px; color:#111; }
+        /* small screens */
+        @media (max-width:520px){ .finder-menu .item:nth-child(n+4){ display:none; } }
+    </style>
+
+    <div class="os-topbar" role="banner" aria-label="macOS top bar">
+        <div class="os-left">
+            <div class="apple" aria-hidden="true">FTP</div>
+            <nav class="finder-menu" aria-label="Finder menu">
+                <div class="item">Finder</div>
+                <div class="item">File</div>
+                <div class="item">Edit</div>
+                <div class="item">View</div>
+                <div class="item">Go</div>
+                <div class="item">Window</div>
+                <div class="item">Help</div>
+            </nav>
+        </div>
+
+        <div class="os-right" aria-hidden="false">
+            <div class="top-clock" id="topClock" aria-live="polite"></div>
+        </div>
+    </div>
+
+    <script>
+        (function updateClock(id){
+            const el = document.getElementById(id);
+            if(!el) return;
+            function fmt(n){return n<10?'0'+n:n;}
+            function tick(){
+                const d = new Date();
+                const hh = d.getHours();
+                const mm = fmt(d.getMinutes());
+                el.textContent = hh + ':' + mm;
+            }
+            tick();
+            setInterval(tick, 30000);
+        })('topClock');
+    </script>
+    <div class="mac-window" id="PageWindow">
+        <div class="titlebar" id="dragHandle">
+            <div class="btns">
+                <span class="btn close"></span>
+                <span class="btn minimize"></span>
+                <span class="btn zoom"></span>
+            </div>
+            <div class="title">Minecraft</div>
+            <div class="menu-hint">*Actually it's eaglercraft</div>
+        </div>
+        <div class="meta" style="padding:16px;">
+            <p>
+                You can play Minecraft directly in your web browser using the Eaglercraft project. Follow these steps to get started:
+            </p>
+            <ol>
+                <li>Open your web browser (Chrome, Firefox, Edge, etc.).</li>
+                <li>Open Eaglercraft: <a href="https://coss.yupoo.com/upchat/2025-10-25/1761382623726.html" target="_blank">Click me to open!</a></li>
+                <li>Start playing Minecraft right in your browser!</li>
+            </ol>
+            <div class="title">
+                Also join my server:
+            </div>
+            <div class="meta" style="text-align: center; -webkit-user-select: text; padding: 4px; width: fit-content; margin: 0 auto; font-size: 2em">
+                47.109.195.152:19178
+            </div>
+            <div class="meta" style="text-align: center;">
+                Your perfect place to pvp with pig god!
+            </div>
+            <div class="right">
+                <div class="img_border">
+                    <img src="https://pic1.imgdb.cn/item/68fc789e3203f7be009e6b51.jpg" alt="pig,steve,sheep" style="height:150px;"/>
+                    <div class="title">Pig,Steve,Sheep</div>
+                </div>
+                <div class="img_border">
+                    <img src="https://pic1.imgdb.cn/item/68fc93b43203f7be009e7adb.jpg" alt="Northeastern China Rain Sister" style="height:150px;"/>
+                    <div class="title">东北雨姐</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+    (function makeDraggable(winId, handleId){
+            const win = document.getElementById(winId);
+            const handle = document.getElementById(handleId);
+            let dragging = false, startX, startY, origX, origY;
+            handle.addEventListener('mousedown', (e)=>{
+                dragging = true;
+                startX = e.clientX; startY = e.clientY;
+                const rect = win.getBoundingClientRect();
+                origX = rect.left; origY = rect.top-45;
+                document.body.style.cursor = 'move';
+            });
+            document.addEventListener('mouseup', ()=> { dragging=false; document.body.style.cursor='default'; });
+            document.addEventListener('mousemove', (e)=>{
+                if (!dragging) return;
+                const dx = e.clientX - startX, dy = e.clientY - startY;
+                win.style.position = 'absolute';
+                win.style.left = (origX + dx) + 'px';
+                win.style.top = (origY + dy) + 'px';
+            });
+        })('PageWindow','dragHandle');
+</script>
