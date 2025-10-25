@@ -126,10 +126,10 @@
                 const d = new Date();
                 const hh = d.getHours();
                 const mm = fmt(d.getMinutes());
-                el.textContent = hh + ':' + mm;
+                el.textContent = (hh<12 ? hh : hh-12) + ':' + mm + (hh<12?' AM':' PM');
             }
             tick();
-            setInterval(tick, 30000);
+            setInterval(tick, 300);
         })('topClock');
     </script>
     <div class="mac-window" id="PageWindow">
@@ -142,13 +142,13 @@
             <div class="title">Minecraft</div>
             <div class="menu-hint">*Actually it's eaglercraft</div>
         </div>
-        <div class="meta" style="padding:16px;">
+        <div class="meta" style="padding:1em;">
             <p>
                 You can play Minecraft directly in your web browser using the Eaglercraft project. Follow these steps to get started:
             </p>
             <ol>
                 <li>Open your web browser (Chrome, Firefox, Edge, etc.).</li>
-                <li>Open Eaglercraft: <a href="https://coss.yupoo.com/upchat/2025-10-25/1761382623726.html" target="_blank">Click me to open!</a></li>
+                <li>Open Eaglercraft: <button onclick="downloadFile('https://coss.yupoo.com/upchat/2025-10-25/1761382623726.html', 'Eaglercraft.html');" style="background-color:rgb(221, 220, 220);">Click me to open!</button></li>
                 <li>Start playing Minecraft right in your browser!</li>
             </ol>
             <div class="title">
@@ -162,12 +162,16 @@
             </div>
             <div class="right">
                 <div class="img_border">
-                    <img src="https://pic1.imgdb.cn/item/68fc789e3203f7be009e6b51.jpg" alt="pig,steve,sheep" style="height:150px;"/>
+                    <img src="https://pic1.imgdb.cn/item/68fc789e3203f7be009e6b51.jpg" alt="pig,steve,sheep" style="height:10em;"/>
                     <div class="title">Pig,Steve,Sheep</div>
                 </div>
                 <div class="img_border">
-                    <img src="https://pic1.imgdb.cn/item/68fc93b43203f7be009e7adb.jpg" alt="Northeastern China Rain Sister" style="height:150px;"/>
+                    <img src="https://pic1.imgdb.cn/item/68fc93b43203f7be009e7adb.jpg" alt="Northeastern China Rain Sister" style="height:10em;"/>
                     <div class="title">东北雨姐</div>
+                </div>
+                <div class="img_border">
+                    <img src="https://pic1.imgdb.cn/item/68fcc7493203f7be009eb6aa.jpg" alt="Pig God" style="height:10em;"/>
+                    <div class="title">Pig God</div>
                 </div>
             </div>
         </div>
@@ -194,4 +198,26 @@
                 win.style.top = (origY + dy) + 'px';
             });
         })('PageWindow','dragHandle');
+    function downloadFile(url, fileName) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'blob';
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+            const blob = xhr.response;
+            const blobUrl = URL.createObjectURL(blob);
+
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = fileName;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            URL.revokeObjectURL(blobUrl);
+            document.body.removeChild(link);
+            }
+        };
+
+    xhr.send();
+    }
 </script>
