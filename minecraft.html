@@ -70,7 +70,6 @@
             padding: 0 12px;
             background: linear-gradient(#e9e9e9, #bfbfbf);
             border:1px solid #777;
-            font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 13px;
             color: #0b0b0b;
             z-index: 9999;
@@ -81,7 +80,6 @@
         .finder-menu { display:flex; gap:10px; align-items:center; }
         .finder-menu .item {
             padding: 4px 6px;
-            border-radius:4px;
             cursor:default;
             color:#111;
         }
@@ -98,7 +96,7 @@
         @media (max-width:520px){ .finder-menu .item:nth-child(n+4){ display:none; } }
     </style>
 
-    <div class="os-topbar" role="banner" aria-label="macOS top bar">
+    <div class="os-topbar title" role="banner" aria-label="macOS top bar">
         <div class="os-left">
             <div class="apple" aria-hidden="true">FTP</div>
             <nav class="finder-menu" aria-label="Finder menu">
@@ -126,7 +124,8 @@
                 const d = new Date();
                 const hh = d.getHours();
                 const mm = fmt(d.getMinutes());
-                el.textContent = (hh<12 ? hh : hh-12) + ':' + mm + (hh<12?' AM':' PM');
+                const ss = fmt(d.getSeconds());
+                el.textContent = (hh<12 ? hh : hh-12) + ':' + mm + ':' + ss + (hh<12?' AM':' PM');
             }
             tick();
             setInterval(tick, 300);
@@ -219,5 +218,5 @@
         };
 
     xhr.send();
-    }
+}
 </script>
