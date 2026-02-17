@@ -3,137 +3,101 @@
 <head> 
 <meta charset="utf-8"> 
 </head> 
-<title>FTPbox</title>
+<title>神金的资源分享</title>
 <style type="text/css">
-    body {background-image:url('https://pic1.imgdb.cn/item/68f482c33203f7be007d478b.jpg');background-size: 50%;}
-    /* Classic macOS 8-ish window styling */
-    .mac-window {
-        width: 680px;
-        margin: 48px auto;
-        background: linear-gradient(#d9d9d9, #bfbfbf);
-        border: 2px solid #fff;
-        box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
-        font-family: "Helvetica Neue", Arial, "Nimbus Sans L", sans-serif;
-        color: #000;
-        user-select: none;
-        position: relative;
+  body {
+    background-image:url('https://pic1.imgdb.cn/item/67a88bcad0e0a243d4fd7a4e.jpg');
+    padding: 12px;
+  }
+  .card{
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 1em;
+    padding: 1em;
+    color: white;
+  }
+  .title{
+    font-size: 1.6em;
+  }
+  .file{
+    background-size: cover;
+    background-position: center;
+    border-radius: 1em;
+  }
+  .mask {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 1em;
+  }
+  .link{
+    color: rgb(255, 160, 160);
+    font-size: 1em;
+    transition: all 0.4s;
+  }
+  div:hover.link{
+    color: rgb(255, 89, 89);
+    font-weight: bold;
+    font-size: 1.3em;
+  }
+  @keyframes fadeinup {
+      from {
+        transform: translatey(30px);
+       }
+       to {
+        transform: translatey(0);
+      }
     }
-
-    /* Title bar */
-    .titlebar {
-        height: 28px;
-        display: flex;
-        align-items: center;
-        background: linear-gradient(#e9e9e9, #bfbfbf);
-        border-bottom: 1px solid #999;
-        padding: 0 8px;
-        cursor: move;
-    }
-    .titlebar .btns { display:flex; gap:6px; width:72px; }
-    .btn {
-        width:12px; height:12px;
-        border-radius:50%;
-        display:inline-block;
-        box-shadow: inset 0 -1px 0 rgba(0,0,0,0.2);
-        border:1px solid #777;
-    }
-    .btn.close { background: radial-gradient(circle at 30% 30%, #ff6b6b, #c43f3f); }
-    .btn.minimize { background: radial-gradient(circle at 30% 30%, #ffd76a, #c2932b); }
-    .btn.zoom { background: radial-gradient(circle at 30% 30%, #86ec86, #2fa32f); }
-
-    .title { flex:1; text-align:center; font-weight:bold; font-size:13px; color:#111; text-shadow: 0 1px #fff; }
-    .menu-hint { width:120px; font-size:11px; text-align:right; color:#333; opacity:.8; }
-
-    /* Content layout */
-    .content { display:flex; padding:12px; gap:12px; }
-    .left { width:220px; text-align:center; }
-    .art {
-        width:200px; height:200px;
-        background: linear-gradient(135deg,#f2f2f2,#d8d8d8);
-        border:2px solid #999;
-        display:flex; align-items:center; justify-content:center;
-        font-size:72px; color:#777;
-        box-shadow: inset -4px -4px 0 rgba(255,255,255,0.6), inset 4px 4px 0 rgba(0,0,0,0.05);
-    }
-    .meta { margin-top:8px; font-size:13px; }
-    /* Right side */
-    .right { flex:1; display:flex; flex-direction:column; gap:10px; }
-    /* list */
-    .list { border-top:2px solid #cfcfcf; padding-top:8px; max-height:140px; overflow:auto; background:linear-gradient(#eaeaea,#d7d7d7); border:1px solid #bbb; }
-    .track {
-        padding:6px; border-bottom:1px dotted #c0c0c0; cursor:pointer;align-items:center;
-    }
-    .track:hover { background:#f3f3f3; }
-    .txt { margin-left:auto; font-size:12px; color:#222; }
-    /* small responsive */
-    @media (max-width:720px){ .mac-window { width:95%; } }
 </style>
-</head>
 <body>
-    <div class="mac-window" id="PageWindow">
-        <div class="titlebar" id="dragHandle">
-            <div class="btns">
-                <span class="btn close"></span>
-                <span class="btn minimize"></span>
-                <span class="btn zoom"></span>
-            </div>
-            <div class="title">FTPbox.dpdns.org</div>
-            <div class="menu-hint">*Fuck The Page</div>
+  <div class="card">
+    <div class="title">神金的资源分享</div>
+    <p>分享我的杂七杂八的文件</p>
+    <div class="file" style="background-image:url('https://zl.wpscdn.cn/2026/02/17/space_img/2d425b51-c866-483f-bd74-6235445368c5.png');">
+      <div class="mask">
+        <div style="padding: 1em;">
+          <div class="title">DOG-Client-1.16.5</div>
+          我的原版增强客户端,以高性能和高兼容性为目标
+          <a href="https://file.icve.com.cn/file_doc/qdqqd/8221771309547239.zip"><div class="link">▶.zip版</div></a>
+          <a href="https://file.icve.com.cn/file_doc/qdqqd/7031771315100344.exe"><div class="link">▶.exe版</div></a>
         </div>
-
-        <div class="content">
-            <div class="left">
-                <div class="art">
-                    <div class="note">FTP</div>
-                </div>
-            </div>
-            <div class="right">
-                <div class="list">
-                    <div class="track">
-                        <a href="https://ftpbox.dpdns.org">
-                        <div class="title">Homepage</div>
-                        </a>
-                    </div>
-                    <div class="track">
-                        <a href="https://ftpbox.dpdns.org/music/">
-                        <div class="title">QuickTime?</div>
-                        </a>
-                    </div>
-                    <div class="track">
-                        <a href="https://ftpbox.dpdns.org/minecraft/">
-                        <div class="title">Minecraft</div>
-                        </a>
-                    </div>
-                    </div>
-                    <div class="txt">m
-                        <p>FTPbox.dpdns.org</p>
-                        <p>IDK how you find there...</p>
-                        <p>But I hope you enjoy your stay!</p>
-                    </div>
-                </div>
+      </div>
+    </div>
+    <br>
+    <div class="file" style="background-image:url('https://zl.wpscdn.cn/2026/02/17/space_img/2d425b51-c866-483f-bd74-6235445368c5.png');">
+      <div class="mask">
+        <div style="padding: 1em;">
+          <div class="title">DOG-Client-1.21.11</div>
+          另一个原版增强客户端,使用最新Minecraft版本整合,性能更高,内容最多,甚至自带可选的低配光影,但兼容性不如1.16.5
+          <a href="https://file.icve.com.cn/file_doc/qdqqd/8221771309547239.zip"><div class="link">▶.zip版</div></a>
+          <a href="https://file.icve.com.cn/file_doc/qdqqd/8541771315218263.exe"><div class="link">▶.exe版</div></a>
         </div>
-        </div>
-    </body>
-</html>
-<script>
-    (function makeDraggable(winId, handleId){
-            const win = document.getElementById(winId);
-            const handle = document.getElementById(handleId);
-            let dragging = false, startX, startY, origX, origY;
-            handle.addEventListener('mousedown', (e)=>{
-                dragging = true;
-                startX = e.clientX; startY = e.clientY;
-                const rect = win.getBoundingClientRect();
-                origX = rect.left; origY = rect.top-45;
-                document.body.style.cursor = 'move';
-            });
-            document.addEventListener('mouseup', ()=> { dragging=false; document.body.style.cursor='default'; });
-            document.addEventListener('mousemove', (e)=>{
-                if (!dragging) return;
-                const dx = e.clientX - startX, dy = e.clientY - startY;
-                win.style.position = 'absolute';
-                win.style.left = (origX + dx) + 'px';
-                win.style.top = (origY + dy) + 'px';
-            });
-        })('PageWindow','dragHandle');
-</script>
+      </div>
+    </div>
+    <br>
+    <div class="file" style="background-color: rgb(55, 55, 55);">
+      <div style="padding: 1em;">
+        <div class="title">如何使用本站资源?</div>
+        本站资源分为<div style="color: rgb(255, 160, 160);display: inline;">.zip</div>和<div style="color: rgb(255, 160, 160);display: inline;">.exe</div>两种文件:
+        <br>
+        <div style="font-size: 1.3em;">.zip</div>
+        此类资源要求您的电脑安装了可解压zip的解压缩软件,若您不确定或不知道您的电脑是否安装,请下载.exe结尾的资源,<div style="color: rgb(255, 160, 160);display: inline;">.zip资源和.exe资源的内容是一样的</div>
+        <br>
+        <div style="font-size: 1.3em;">.exe</div>
+        直接下载,打开,点击Extract按钮,等待进度条走完,稍后这个文件的目录会出现一个同名文件夹,打开即可
+      </div>
+    </div>
+    <br>
+    <div class="file" style="background-color: rgb(55,55,55);">
+      <div style="padding: 1em;">
+        <div class="title">友情链接</div>
+        <a href="https://eb.jkun.cf"><div class="link">eb.jkun.cf -我的停更博客</div></a>
+        <a href="https://9178vip.jkun.cf"><div class="link">9178vip.jkun.cf -我的停更主页</div></a>
+        <a href="https://tcdmc.github.io/other"><div class="link">tcdmc.github.io/other -全损音乐轰炸区</div></a>
+        <a href="https://b163.jkun.cf"><div class="link">b163.jkun.cf -自制的简陋网易云音乐播放器</div></a>
+        <a href="https://mcjs.cc"><div class="link">mcjs.cc -一个网页版的Minecraft整理</div></a>
+        <a href="https://enterbox.github.io"><div class="link">enterbox.github.io -我的第一个网页</div></a>
+      </div>
+    </div>
+  </div>
+</body>
